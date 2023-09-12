@@ -12,8 +12,10 @@ const TitleWrapper = styled.div`
 const Title = styled.h1`
     color: white;
     word-break: break-all;
-    background-color: #9fe7a4;
+    background-color: #ADD8E6;
     text-shadow: 0px 0px 3px #000;
+    border-radius: 3.5px;
+    font-size: 50px;
     padding: 10px 60px;
     margin: 0 0 0 50px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);

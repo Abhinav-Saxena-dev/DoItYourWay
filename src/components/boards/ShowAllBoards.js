@@ -13,7 +13,7 @@ const Title = styled.h2`
 const BoardWrapper = styled.div`
     width: 345px;
     margin: 20px;
-    background-color: white;
+    background-color: #fae5f2;
     color: #333;
     padding: 15px 0;
     display: flex;

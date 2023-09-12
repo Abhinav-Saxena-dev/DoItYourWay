@@ -19,6 +19,9 @@ const activeBoardDataSlice = createSlice({
       };
     },
     submitNewCard: (state, { payload }) => {
+      console.log('====================================');
+      console.log(payload);
+      console.log('====================================');
       const { listId, cardName, cardId } = payload;
       const currentList = state[listId];
       currentList.cards.push({
@@ -42,6 +45,9 @@ const activeBoardDataSlice = createSlice({
     archivePost: (state, { payload }) => {
       const { cardId, listId } = payload;
       const currentList = state[listId];
+      console.log('====================================');
+      console.log(payload);
+      console.log('====================================');
       const findCard = currentList.cards.find((card) => card.cardId === cardId);
 
       if (findCard.isArchived === false) {

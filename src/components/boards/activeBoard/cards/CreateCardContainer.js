@@ -1,10 +1,11 @@
-import React from 'react';
-import { Field, reduxForm, reset } from 'redux-form';
-import { useDispatch, useSelector } from 'react-redux';
-import uniqueId from 'lodash/uniqueId';
-import BoardTitleInput from './../../boardCreation/BoardTitleInput';
-import Card from './Card';
-import { submitNewCard } from '../../../../redux/activeBoardDataSlice/activeBoardDataSlice';
+import React from "react";
+import { Field, reduxForm, reset } from "redux-form";
+import { useDispatch, useSelector } from "react-redux";
+import uniqueId from "lodash/uniqueId";
+import BoardTitleInput from "./../../boardCreation/BoardTitleInput";
+import Card from "./Card";
+import { submitNewCard } from "../../../../redux/activeBoardDataSlice/activeBoardDataSlice";
+import { Droppable, Draggable } from "react-beautiful-dnd";
 
 const CreateCardContainer = ({ handleSubmit, listId }) => {
   const dispatch = useDispatch();
@@ -12,21 +13,49 @@ const CreateCardContainer = ({ handleSubmit, listId }) => {
 
   const submit = (values) => {
     let cardName = `cardName_${listId}`;
-    dispatch(submitNewCard(values[cardName], uniqueId('cardItem_'), listId));
+
+    const data = {
+      listId: listId,
+      cardName: values[cardName],
+      cardId: uniqueId("cardItem_"),
+    };
+    dispatch(submitNewCard(data));
   };
 
   const renderCards = () => {
-    return activeBoardData[listId].cards.map((card, i) => {
-      return (
-        <Card
-          key={i}
-          title={card.name}
-          cardId={card.cardId}
-          listId={card.listId}
-          isArchived={card.isArchived}
-        />
-      );
-    });
+    return (
+      <Droppable droppableId="cards">
+        {(provided) => (
+          <div
+            className="cards"
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+          >
+            {activeBoardData[listId].cards.map((card, i) => (
+              <Draggable key={card.cardId} draggableId={card.cardId} index={i}>
+                {(provided) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                  >
+                    <Card
+                      key={i}
+                      id={i}
+                      title={card.name}
+                      cardId={card.cardId}
+                      listId={card.listId}
+                      isArchived={card.isArchived}
+                    />
+                  </div>
+                )}
+              </Draggable>
+            ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
+    );
   };
 
   return (
@@ -49,18 +78,18 @@ const validate = (values) => {
   const errors = {};
 
   if (!values.cardName) {
-    errors.cardName = 'oops!';
+    errors.cardName = "oops!";
   }
 
   return errors;
 };
 
 const afterSubmit = (result, dispatch) => {
-  dispatch(reset('cardName'));
+  dispatch(reset("cardName"));
 };
 
 export default reduxForm({
   validate,
-  form: 'cardName',
+  form: "cardName",
   onSubmitSuccess: afterSubmit,
 })(CreateCardContainer);

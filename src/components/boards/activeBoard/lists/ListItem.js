@@ -7,7 +7,9 @@ const ListItemWrapper = styled.div`
   display: inline-block;
   vertical-align: top;
   margin: 20px;
+  width: 300px;
   background-color: rgb(255, 255, 255);
+  border-radius: 3px;
   padding: 5px 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   transition: all 150ms ease-in-out;
@@ -22,10 +24,7 @@ const ListItemHeader = styled.h4`
   font-weight: 900;
 `;
 
-const ListItem = ({name, id}) => {
-  console.log('====================================');
-  console.log(name);
-  console.log('====================================');
+const ListItem = ({ name, id }) => {
   return (
     <div>
       <ListItemWrapper>

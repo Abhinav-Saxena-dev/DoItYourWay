@@ -10,6 +10,12 @@ import { listEditModeEnabled, selectActiveBoard, setActiveBoardSuccess } from '.
 import { submitList, selectActiveBoard as selectActiveBoard2 } from '../../../redux/activeBoardDataSlice/activeBoardDataSlice';
 import store from '../../../redux/store';
 
+const backgroundStyle = {
+  background: 'linear-gradient(119deg, rgba(4,128,213,1) 0%, rgba(13,112,152,1) 37%, rgba(0,212,255,1) 100%, rgba(6,165,226,1) 100%)',
+  height: '100vh'
+};
+
+
 const ShowActiveBoard = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -37,7 +43,7 @@ const ShowActiveBoard = () => {
   }
 
   return (
-    <div>
+    <div style={backgroundStyle}>
       <ActiveBoardTitle>{getTitle()}</ActiveBoardTitle>
       <ListWrapper>
         <ListItemsContainer />
