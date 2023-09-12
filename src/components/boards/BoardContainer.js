@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 
 const BoardContainer = () => {
 
-  const { boardsCollection } = useSelector((state) => state.boardsCollection);
+  const boardsCollection = useSelector((state) => state.boardsCollection);
 
   const renderAllBoards = () => {
     return boardsCollection?.map((board) => {

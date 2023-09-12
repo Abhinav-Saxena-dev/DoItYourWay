@@ -7,6 +7,9 @@ import {
   cancelNewBoard,
 } from "../../../redux/boardSlice/boardSlice";
 import { useDispatch } from "react-redux";
+import store from "../../../redux/store";
+import { storeNewBoard } from "../../../redux/boardCollectionSlice/boardCollectionSlice";
+import { reset } from "redux-form";
 
 const Title = styled.h3`
   color: white;
@@ -49,8 +52,17 @@ const ActiveCreateBoard = () => {
   const dispatch = useDispatch();
 
   const submit = (values) => {
-    dispatch(submitNewBoard(values.boardTitle));
-    values.boardTitle = "";
+    try {
+      dispatch(submitNewBoard(values.boardTitle));
+      const newBoard = {
+        id: store.getState().newBoard.id,
+        title: store.getState().newBoard.title,
+      };
+      dispatch(storeNewBoard(newBoard));
+      dispatch(reset('boardTitle')); 
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const cancelCreatingBoard = () => {
@@ -69,7 +81,10 @@ const ActiveCreateBoard = () => {
 
       <BodyWrapper>
         <BoardNamingTitle>What shall we call the board?</BoardNamingTitle>
-        <BoardTitleForm handleSubmit={submit} cancelAction={cancelCreatingBoard} />
+        <BoardTitleForm
+          onSubmit={submit}
+          cancelAction={cancelCreatingBoard}
+        />
       </BodyWrapper>
     </Wrapper>
   );

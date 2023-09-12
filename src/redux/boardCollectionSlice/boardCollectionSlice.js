@@ -7,7 +7,7 @@ const boardCollectionSlice = createSlice({
     initialState,
     reducers: {
         storeNewBoard: (state, {payload}) => {
-            state = [...state, payload];
+            state.push(payload);
         }
     }
 });

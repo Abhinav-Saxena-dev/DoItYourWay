@@ -48,18 +48,17 @@ const SubmitButton = styled.button`
 `;
 
 let BoardTitleForm = ({ handleSubmit, cancelAction }) => {
-
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <Field name="boardTitle" component={BoardTitleInput} type="text" />
       </form>
-      <ButtonWrapper>
-        <CancelButton onClick={cancelAction}>Cancel</CancelButton>
-        <SubmitButton type="submit">
-          Create
-        </SubmitButton>
-      </ButtonWrapper>
+        <ButtonWrapper>
+          <CancelButton onClick={cancelAction}>Cancel</CancelButton>
+          <SubmitButton onClick={handleSubmit} type="button">
+            Create
+          </SubmitButton>
+        </ButtonWrapper>
     </div>
   );
 };
