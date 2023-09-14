@@ -12,10 +12,10 @@ const Wrapper = styled.div`
   animation: ${fadeIn} 300ms linear;
 `;
 
-const backgroundStyle = {
-  background: 'linear-gradient(119deg, rgba(4,128,213,1) 0%, rgba(13,112,152,1) 37%, rgba(0,212,255,1) 100%, rgba(6,165,226,1) 100%)',
-  height: '100vh'
-};
+const GradientBackground = styled.div`
+background: #27CBF0;
+  height: 100vh;
+`;
 
 const BoardContainer = () => {
 
@@ -28,12 +28,12 @@ const BoardContainer = () => {
   };
 
   return (
-    <div style={backgroundStyle}>
+    <GradientBackground>
     <Wrapper>
       <CreateBoardContainer />
       {renderAllBoards()}
     </Wrapper>
-    </div>
+    </GradientBackground>
   );
 };
 

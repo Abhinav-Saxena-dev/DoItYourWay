@@ -3,12 +3,11 @@ import styled from "styled-components";
 import { fadeIn } from "../../../helper/Animations";
 import { archivePost } from "../../../../redux/activeBoardDataSlice/activeBoardDataSlice";
 import { useDispatch } from "react-redux";
-import { Draggable } from "react-beautiful-dnd";
 
 const CardWrapper = styled.div`
   margin: 10px 0;
   padding: 14px 7px;
-  background: rgb(241, 241, 241);
+  background: #F4A896;
   border-radius: 4.5px;
   cursor: grab;
   animation: ${fadeIn} 300ms linear;
@@ -41,7 +40,7 @@ const Card = ({ title, cardId, listId, isArchived }) => {
     opacity: isArchived ? 0.35 : 1,
     boxShadow: "0 6px 6px rgba(0,0,0,0.16), 0 6px 6px rgba(0,0,0,0.23)",
     textDecoration: isArchived ? "line-through" : "none",
-    backgroundColor: isArchived ? "#DECAFF" : "#caffde",
+    backgroundColor: isArchived ? "#DECAFF" : "#F7D8DB",
   };
 
   return (

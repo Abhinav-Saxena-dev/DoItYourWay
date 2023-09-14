@@ -11,7 +11,7 @@ import { submitList, selectActiveBoard as selectActiveBoard2 } from '../../../re
 import store from '../../../redux/store';
 
 const backgroundStyle = {
-  background: 'linear-gradient(119deg, rgba(4,128,213,1) 0%, rgba(13,112,152,1) 37%, rgba(0,212,255,1) 100%, rgba(6,165,226,1) 100%)',
+  background: '#27CBF0',
   height: '100vh'
 };
 
