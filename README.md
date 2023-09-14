@@ -1,15 +1,15 @@
 # Do-It-Your-Way
 
-##Description
+## Description
 
 DoItYourWay is a task management application designed to help you organize and manage your tasks effortlessly. Built with React and React-Redux, it offers a seamless user experience and robust performance.
 
-##eatures
+## Features
 
-###Centralized State Management with React-Redux
+### Centralized State Management with React-Redux
 DoItYourWay uses React-Redux for centralized state management. This ensures that the state is consistent across all components, making it easier to manage global state variables like user authentication, task lists, and settings.
 
-###Immutable State Updates
+### Immutable State Updates
 By adhering to the principles of immutability, DoItYourWay ensures that state updates are predictable. This is particularly useful for debugging and for understanding the flow of data within the application.
 
 ## Future Tasks
