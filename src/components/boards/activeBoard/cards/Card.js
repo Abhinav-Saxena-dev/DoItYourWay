@@ -29,11 +29,11 @@ const ArchiveTask = styled.div`
   cursor: pointer;
   font-size: 16px;
 `;
-const Card = ({ title, cardId, listId, isArchived }) => {
+const Card = ({ title, cardId, listId, isArchived, boardId }) => {
   const dispatch = useDispatch();
 
-  const togglePost = (cardId, listId) => {
-    dispatch(archivePost({ cardId, listId }));
+  const togglePost = (cardId, listId, boardId) => {
+    dispatch(archivePost({ cardId, listId, boardId }));
   };
 
   const cardStyles = {
@@ -49,7 +49,7 @@ const Card = ({ title, cardId, listId, isArchived }) => {
         style={cardStyles}
       >
         <CardTitle>{title}</CardTitle>
-        <ArchiveTask onClick={() => togglePost(cardId, listId)}>✓</ArchiveTask>
+        <ArchiveTask onClick={() => togglePost(cardId, listId, boardId)}>✓</ArchiveTask>
       </CardWrapper>
     </div>
   );

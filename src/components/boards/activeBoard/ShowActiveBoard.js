@@ -35,7 +35,7 @@ const ShowActiveBoard = () => {
   };
 
   const handleListSubmit = (values) => {
-    dispatch(submitList(values.listItem));
+    dispatch(submitList({listItem: values.listItem, boardId: activeBoard.id}));
   };
 
   if (activeBoard.isFetching) {
@@ -47,7 +47,7 @@ const ShowActiveBoard = () => {
       <ActiveBoardTitle>{getTitle()}</ActiveBoardTitle>
       <ListWrapper>
         
-        <ListItemsContainer />
+        <ListItemsContainer boardId = {activeBoard.id}/>
         {activeBoard.isEditingList ? (
           <ListEditingMode onSubmit={handleListSubmit} />
         ) : (

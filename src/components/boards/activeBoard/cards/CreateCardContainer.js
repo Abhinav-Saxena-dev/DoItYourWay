@@ -10,6 +10,7 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 const CreateCardContainer = ({ handleSubmit, listId }) => {
   const dispatch = useDispatch();
   const activeBoardData = useSelector((state) => state.activeBoardData);
+  const activeBoard = useSelector(state => state.activeBoard);
 
   const submit = (values) => {
     let cardName = `cardName_${listId}`;
@@ -18,6 +19,7 @@ const CreateCardContainer = ({ handleSubmit, listId }) => {
       listId: listId,
       cardName: values[cardName],
       cardId: uniqueId("cardItem_"),
+      boardId: activeBoard.id
     };
     dispatch(submitNewCard(data));
   };
@@ -30,7 +32,7 @@ const CreateCardContainer = ({ handleSubmit, listId }) => {
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
-            {activeBoardData[listId].cards.map((card, i) => (
+            {activeBoardData[activeBoard.id][listId].cards.map((card, i) => (
               <Draggable key={card.cardId} draggableId={card.cardId} index={i}>
                 {(provided) => (
                   <div
@@ -45,7 +47,7 @@ const CreateCardContainer = ({ handleSubmit, listId }) => {
                       cardId={card.cardId}
                       listId={card.listId}
                       isArchived={card.isArchived}
-                      column
+                      boardId = {activeBoard.id}
                     />
                   </div>
                 )}

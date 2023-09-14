@@ -11,21 +11,24 @@ const ListItemsWrapper = styled.div`
   display: flex;
 `;
 
-const ListItemsContainer = () => {
+const ListItemsContainer = ({boardId}) => {
   const activeBoardData = useSelector((state) => state.activeBoardData);
   const dispatch = useDispatch();
 
   const handleDrag = (result) => {
+    if(result.source?.index == null || result.destination?.index == null){
+      return;
+    }
     const sourceIndex = result.source.index;
     const destinationIndex = result.destination.index;
     const list_id = result.source.droppableId;
     const newList_id = result.destination.droppableId;
     const cardId = result.draggableId;
-    dispatch(handleDrop({cardId, list_id, newList_id, sourceIndex, destinationIndex}));
+    dispatch(handleDrop({cardId, list_id, newList_id, sourceIndex, destinationIndex, boardId}));
   }
 
   const renderListItems = () => {
-    const mappedList = mapValues(activeBoardData, (list) => list.name);
+    const mappedList = mapValues(activeBoardData[boardId], (list) => list.name);
     const mappedKeys = Object.keys(mappedList);
     return mappedKeys.map((id, i) => {
       return <ListItem id={id} key={i} name={mappedList[id]} />;

@@ -24,36 +24,40 @@ const activeBoardDataSlice = createSlice({
     },
     submitList: (state, { payload }) => {
       const listId = uniqueId("list_");
-      state[listId] = {
-        name: payload,
-        id: listId,
-        cards: [],
-      };
+      const {boardId, listItem} = payload;
+      state[boardId] = {
+        ...state[boardId],
+        [listId]: {
+          name: listItem,
+          id: listId,
+          cards: [],
+        }
+      }
     },
     submitNewCard: (state, { payload }) => {
-      const { listId, cardName, cardId } = payload;
-      const currentList = state[listId];
+      const { listId, cardName, cardId, boardId } = payload;
+      const currentList = state[boardId][listId];
       currentList.cards.push({
         name: cardName,
         cardId,
         listId,
         isArchived: false,
       });
-      state[listId] = currentList;
+      state[boardId][listId] = currentList;
     },
     handleDrop: (state, { payload }) => {
-      const {cardId, list_id, newList_id, sourceIndex, destinationIndex } = payload;
-      const sourceList = state[list_id].cards;
+      const {cardId, list_id, newList_id, sourceIndex, destinationIndex, boardId } = payload;
+      const sourceList = state[boardId][list_id].cards;
       sourceList.find(card => card.cardId === cardId).listId = newList_id;
       const [removedElement, newSourceList] = removeFromList(sourceList, sourceIndex);
-      state[list_id].cards = newSourceList;
+      state[boardId][list_id].cards = newSourceList;
 
-      const destinationList = state[newList_id].cards;
-      state[newList_id].cards = addToList(destinationList, destinationIndex, removedElement);  
+      const destinationList = state[boardId][newList_id].cards;
+      state[boardId][newList_id].cards = addToList(destinationList, destinationIndex, removedElement);  
     },
     archivePost: (state, { payload }) => {
-      const { cardId, listId } = payload;
-      const currentList = state[listId];
+      const { cardId, listId, boardId } = payload;
+      const currentList = state[boardId][listId];
       const findCard = currentList.cards.find((card) => card.cardId === cardId);
 
       if (findCard.isArchived === false) {
@@ -61,7 +65,7 @@ const activeBoardDataSlice = createSlice({
       } else {
         findCard.isArchived = false;
       }
-      state[listId] = currentList;
+      state[boardId][listId] = currentList;
     },
   },
 });
