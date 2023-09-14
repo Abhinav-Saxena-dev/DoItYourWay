@@ -1,70 +1,27 @@
-# Getting Started with Create React App
+# Do-It-Your-Way
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+##Description
 
-## Available Scripts
+DoItYourWay is a task management application designed to help you organize and manage your tasks effortlessly. Built with React and React-Redux, it offers a seamless user experience and robust performance.
 
-In the project directory, you can run:
+##eatures
 
-### `npm start`
+###Centralized State Management with React-Redux
+DoItYourWay uses React-Redux for centralized state management. This ensures that the state is consistent across all components, making it easier to manage global state variables like user authentication, task lists, and settings.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+###Immutable State Updates
+By adhering to the principles of immutability, DoItYourWay ensures that state updates are predictable. This is particularly useful for debugging and for understanding the flow of data within the application.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Future Tasks
 
-### `npm test`
+### If a user can create and edit stages for a particular board. For example instead of Open > In Progress > Done if they want the stages of their task board to be Read > Working > Reviewing > Completed.
+- This can be accomplished by providing the user with the option to create their own boards, delete existing ones, and allowed to edit existing ones. When a board is being created, users can be provided with a checkbox which can determine if the users wish to keep the default board template, that is, Open - In Progress - Done. If the users opts it, this template can be displayed to them and they can also edit it to their liking. If a user doesn't opt it, user can create their own stages.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### If users can comment on tasks
+- This can be accomplished in a way FIGMA does it. Users can commend on a particular task by clicking on an icon option provided to them on the task itself. This comment will be available to other authorized users who can view it by hovering over the task.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### How will you do error handling?
+- This can be accomplished by multiple ways :
+-- Utilizing Try/Catch properly, on steps prone to throw error.
+-- Creating a global middleware which will act as our Error Handler which will use our customErrorHandler to determine the type of error and what status code to use.
+-- Creating a customErrorHandler Service class which will extend Error. This class will be responsible for returning a type of error instance and status code that will be used by the global middleware, such as notFound, unAuthorized, badRequest, etc.
