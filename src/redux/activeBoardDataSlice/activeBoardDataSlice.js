@@ -3,6 +3,18 @@ import { uniqueId } from "lodash";
 
 const initialState = {};
 
+const removeFromList = (list, index) => {  
+  const result = Array.from(list);  
+  const [removed] = result.splice(index, 1);  
+  return [removed, result];
+}
+
+const addToList = (list, index, element) => {  
+  const result = Array.from(list);  
+  result.splice(index, 0, element);  
+  return result;
+}
+
 const activeBoardDataSlice = createSlice({
   name: "activeBoardData",
   initialState,
@@ -19,9 +31,6 @@ const activeBoardDataSlice = createSlice({
       };
     },
     submitNewCard: (state, { payload }) => {
-      console.log('====================================');
-      console.log(payload);
-      console.log('====================================');
       const { listId, cardName, cardId } = payload;
       const currentList = state[listId];
       currentList.cards.push({
@@ -33,21 +42,18 @@ const activeBoardDataSlice = createSlice({
       state[listId] = currentList;
     },
     handleDrop: (state, { payload }) => {
-      const { cardId, cardName, listId, newListId } = payload;
-      const currentList = state[newListId];
-      currentList.cards.push({ name: cardName, cardId, listId: newListId });
-      const removeCard = state[listId].cards.findIndex(
-        (card) => card.cardId === cardId
-      );
-      state[listId].cards.splice(removeCard, 1);
-      state[newListId] = currentList;
+      const {cardId, list_id, newList_id, sourceIndex, destinationIndex } = payload;
+      const sourceList = state[list_id].cards;
+      sourceList.find(card => card.cardId === cardId).listId = newList_id;
+      const [removedElement, newSourceList] = removeFromList(sourceList, sourceIndex);
+      state[list_id].cards = newSourceList;
+
+      const destinationList = state[newList_id].cards;
+      state[newList_id].cards = addToList(destinationList, destinationIndex, removedElement);  
     },
     archivePost: (state, { payload }) => {
       const { cardId, listId } = payload;
       const currentList = state[listId];
-      console.log('====================================');
-      console.log(payload);
-      console.log('====================================');
       const findCard = currentList.cards.find((card) => card.cardId === cardId);
 
       if (findCard.isArchived === false) {

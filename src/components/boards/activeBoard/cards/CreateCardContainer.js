@@ -24,10 +24,9 @@ const CreateCardContainer = ({ handleSubmit, listId }) => {
 
   const renderCards = () => {
     return (
-      <Droppable droppableId="cards">
+      <Droppable droppableId={listId} type="column">
         {(provided) => (
           <div
-            className="cards"
             {...provided.droppableProps}
             ref={provided.innerRef}
           >
@@ -38,14 +37,15 @@ const CreateCardContainer = ({ handleSubmit, listId }) => {
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
+                    key={i}
                   >
                     <Card
-                      key={i}
                       id={i}
                       title={card.name}
                       cardId={card.cardId}
                       listId={card.listId}
                       isArchived={card.isArchived}
+                      column
                     />
                   </div>
                 )}

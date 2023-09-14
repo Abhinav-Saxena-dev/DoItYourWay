@@ -46,6 +46,7 @@ const ShowActiveBoard = () => {
     <div style={backgroundStyle}>
       <ActiveBoardTitle>{getTitle()}</ActiveBoardTitle>
       <ListWrapper>
+        
         <ListItemsContainer />
         {activeBoard.isEditingList ? (
           <ListEditingMode onSubmit={handleListSubmit} />

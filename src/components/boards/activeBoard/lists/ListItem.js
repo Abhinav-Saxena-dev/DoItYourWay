@@ -26,13 +26,13 @@ const ListItemHeader = styled.h4`
 
 const ListItem = ({ name, id }) => {
   return (
-    <div>
-      <ListItemWrapper>
-        <ListItemHeader>{name}</ListItemHeader>
-        <hr />
-        <CreateCardContainer listId={id} />
-      </ListItemWrapper>
-    </div>
+      <div>
+        <ListItemWrapper>
+          <ListItemHeader>{name}</ListItemHeader>
+          <hr />
+          <CreateCardContainer listId={id} />
+        </ListItemWrapper>
+      </div>
   );
 };
 
